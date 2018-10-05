@@ -2,6 +2,17 @@
 
 require(__DIR__."/config.php");
 
+/*
+ * Make sure we were given an integer before doing anything else
+ */
+if (empty($_GET["count"]) || !is_numeric($_GET["count"]))
+{
+    echo "Yo, give me a number of players to return, like !nextup 3";
+    exit;
+}
+/*
+ * Connect to the database
+ */
 try 
 {
     $conn = new PDO("mysql:host=$server;dbname=$datbaseName", $username, $password);
