@@ -2,6 +2,18 @@
 
 require(__DIR__."/config.php");
 
+/*
+ * Make sure all pieces from the query string are present
+ */
+if (empty($_GET["channel"]) || empty($_GET["user"])
+{
+    echo "Paremeters missing";
+    exit;
+}
+
+/*
+ * Connect to the database
+ */
 try 
 {
     $conn = new PDO("mysql:host=$server;dbname=$datbaseName", $username, $password);
