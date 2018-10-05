@@ -39,3 +39,7 @@ Note: Make sure this is set to Owner or Owner/Moderators only! You don't want ra
 ## Developer's notes for streamers
 - Use the `!showqueue` command to check for names that may have persisted from the last stream.
 - Use the `!nextup` command with a high number (like 1000) to clear the database at the beginning of your stream.
+
+# TODO
+- Clean up for sql injection (in case used through browser)
+- Add "xss clean" style security to inputs
