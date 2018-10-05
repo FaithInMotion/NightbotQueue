@@ -36,9 +36,18 @@ Definition: Pulls the top 3 names from the queue and deletes them from the datab
 
 Note: Make sure this is set to Owner or Owner/Moderators only! You don't want random users coming in and deleting so many names out of the queue just because.
 
+### Command: !clearqueue
+```
+!commands add !clearqueue $(urlfetch http://www.example.com/clear.php?channel=dsc)
+```
+Usage: `!clearqueue`
+
+Definition: Removes all users currently in the database so the queue can be started again fresh.
+
+Note: Make sure this is set to Owner or Owner/Moderators only! You don't want random users coming in and deleting names out of the queue just because.
+
 ## Developer's notes for streamers
 - Use the `!showqueue` command to check for names that may have persisted from the last stream.
-- Use the `!nextup` command with a high number (like 1000) to clear the database at the beginning of your stream.
 
 # TODO
 - Clean up for sql injection (in case used through browser)
