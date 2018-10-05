@@ -14,7 +14,6 @@ if (empty($_GET["channel"]))
 /*
  * Connect to the database
  */
-
 try 
 {
     $conn = new PDO("mysql:host=$server;dbname=$datbaseName", $username, $password);
