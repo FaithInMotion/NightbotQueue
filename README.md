@@ -14,9 +14,9 @@ Simple queue system for Nightbot (requires your own server/database/domain to ru
 ```
 !commands add !addme $(urlfetch http://www.example.com/add.php?channel=dsc&user=$(user))
 ```
-Usage: `!nextup 3`
+Usage: `!addme`
 
-Definition: Pulls the top 3 names from the queue and deletes them from the database. Only allows one entry per user, until their entry is deleted by `!nextup`.
+Definition: Adds the calling user to the bottom of the list. Only allows one entry per user, until their entry is deleted by `!nextup`.
 
 ### Command: !showqueue
 ```
