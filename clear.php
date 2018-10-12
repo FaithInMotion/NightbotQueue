@@ -31,7 +31,7 @@ catch(PDOException $e)
  * dealing with
  *
  * Nightbot command:
- * !commands add !clearqueue $(urlfetch http://queue.christinakline.com/clear.php?channel=bowler)
+ * !commands add !clearqueue $(urlfetch http://www.example.com/clear.php?channel=dsc)
  */
 $channel = $_GET["channel"];
 
@@ -53,4 +53,3 @@ catch (PDOException $e)
 }
 
 echo "The queue is clear and ready to be filled again! Type !addme to be added to the queue!";
-?>
