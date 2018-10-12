@@ -41,7 +41,6 @@ class StatusController
         }
         catch (PDOException $e)
         {
-            echo $e->getMessage();
             return self::NOT_FOUND;
         }
 
