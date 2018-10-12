@@ -49,10 +49,19 @@ catch(PDOException $e)
  * Nightbot command:
  * !commands add !openqueue $(urlfetch http://www.example.com/status.php?channel=dsc&desired=open)
  * 
- * Find out if the queue was previously open or not (strictly for logging)
+ * Find out if the queue was previously open or not (strictly for talking)
  */
 $statusController = new StatusController();
 $previousQueueStatus = $statusController->isQueueOpen($conn, $channel);
+
+/*
+ * Make sure we actually found a status
+ */
+if ($previousQueueStatus == StatusController::NOT_FOUND)
+{
+    echo "I'm having a brain fart - couldn't get previous channel status!";
+    exit;
+}
 
 /*
  * Make sure we aren't already set up as desired

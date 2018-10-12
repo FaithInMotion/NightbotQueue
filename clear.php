@@ -52,4 +52,4 @@ catch (PDOException $e)
     exit;
 }
 
-echo "The queue is clear and ready to be filled again! Type !addme to be added to the queue!";
+echo "All quarters have been returned and the queue is now empty!";
