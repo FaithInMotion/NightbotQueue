@@ -34,13 +34,14 @@ class StatusController
             $result = $stmt->setFetchMode(PDO::FETCH_OBJ);
             $row = $stmt->fetch();
 
-            if (empty($row->is_open) != 1)
+            if (empty($row))
             {
                 return self::NOT_FOUND;
             }
         }
         catch (PDOException $e)
         {
+            echo $e->getMessage();
             return self::NOT_FOUND;
         }
 
