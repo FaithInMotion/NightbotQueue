@@ -53,4 +53,3 @@ catch (PDOException $e)
 }
 
 echo "The queue is clear and ready to be filled again! Type !addme to be added to the queue!";
-?>
