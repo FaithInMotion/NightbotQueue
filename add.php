@@ -1,15 +1,20 @@
 <?php
 
 require(__DIR__."/config.php");
+require_once(__DIR__."/statuscontroller.php");
 
 /*
  * Make sure all pieces from the query string are present
  */
+ 
 if (empty($_GET["channel"]) || empty($_GET["user"]))
 {
     echo "Paremeters missing";
     exit;
 }
+
+$channel = $_GET["channel"];
+$user = $_GET["user"];
 
 /*
  * Connect to the database
@@ -27,14 +32,24 @@ catch(PDOException $e)
 }
 
 /*
- * Now that we have a connection, we need to determine which channel we are 
- * dealing with and who the user is
+ * Make sure the queue is not closed
+ */
+$statusController = new StatusController();
+$queueStatus = $statusController->isQueueOpen($conn, $channel);
+
+if ($queueStatus == StatusController::CLOSED)
+{
+    echo "The queue is currently closed. Please wait for the streamer to open it up.";
+    exit;
+}
+
+
+/*
+ * Now that we have a connection, work our magic
  *
  * Nightbot command:
- * !commands add !addme $(urlfetch http://www.example.com/add.php?channel=TABLE_NAME&user=$(user))
+ * !commands add !addme $(urlfetch http://www.example.com/add.php?channel=dsc&user=$(user))
  */
-$channel = $_GET["channel"];
-$user = $_GET["user"];
 
 /*
  * First, check if the user is already in the table
@@ -81,4 +96,3 @@ catch (PDOException $e)
  * Close the connection
  */ 
 $conn = null;
-?>

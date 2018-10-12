@@ -1,6 +1,7 @@
 <?php
 
 require(__DIR__."/config.php");
+require_once(__DIR__."/statuscontroller.php");
 
 /*
  * Make sure we were given an integer before doing anything else
@@ -10,12 +11,10 @@ if (empty($_GET["count"]) || !is_numeric($_GET["count"]))
     echo "Yo, give me a number of players to return, like !nextup 3";
     exit;
 }
-/*
- * Connect to the database
- */
+
 try 
 {
-    $conn = new PDO("mysql:host=$server;dbname=$datbaseName", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$datbaseName", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
@@ -26,11 +25,23 @@ catch(PDOException $e)
 }
 
 /*
+ * Make sure the queue is not closed
+ */
+$statusController = new StatusController();
+$queueStatus = $statusController->isQueueOpen($conn, $channel);
+
+if ($queueStatus == StatusController::CLOSED)
+{
+    echo "The queue is currently closed. Please wait for the streamer to open it up.";
+    exit;
+}
+
+/*
  * Now that we have a connection, we need to determine which channel we are 
  * dealing with and how many names we want
  *
  * Nightbot command:
- * !commands add !nextup $(urlfetch http://www.example.com/next.php?channel=TABLE_NAME&count=$(query))
+ * !commands add !nextup $(urlfetch http://www.example.com/next.php?channel=dsc&count=$(query))
  */
 $channel = $_GET["channel"];
 $count = $_GET["count"];
@@ -94,5 +105,3 @@ catch (PDOException $e)
 }
 
 echo $chosenUserList." - you're up next!";
-
-?>

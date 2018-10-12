@@ -16,7 +16,7 @@ if (empty($_GET["channel"]))
  */
 try 
 {
-    $conn = new PDO("mysql:host=$server;dbname=$datbaseName", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$datbaseName", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
@@ -31,7 +31,7 @@ catch(PDOException $e)
  * dealing with and how many names are in the queue
  *
  * Nightbot command:
- * !commands add !showqueue $(urlfetch http://www.example.com/list.php?channel=TABLE_NAME)
+ * !commands add !showqueue $(urlfetch http://www.example.com/list.php?channel=dsc)
  */
 $channel = $_GET["channel"];
 $rows = array();
