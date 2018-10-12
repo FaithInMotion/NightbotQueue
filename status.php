@@ -47,7 +47,7 @@ catch(PDOException $e)
  * Now that we have a connection, we need to decide whether that channel is accepting queues or not
  *
  * Nightbot command:
- * !commands add !openqueue $(urlfetch http://www.example.com/status.php?channel=bowler&desired=open)
+ * !commands add !openqueue $(urlfetch http://www.example.com/status.php?channel=dsc&desired=open)
  * 
  * Find out if the queue was previously open or not (strictly for talking)
  */
