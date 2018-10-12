@@ -66,5 +66,4 @@ Definition: Closes the queue up to user submissions
 - Use the `!showqueue` command to check for names that may have persisted from the last stream.
 
 # TODO
-- Add "xss clean" style security to inputs
 - Convert to a true RESTful API
