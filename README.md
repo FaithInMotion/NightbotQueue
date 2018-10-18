@@ -3,12 +3,43 @@ Simple queue system for Nightbot (requires your own server/database/domain to ru
 
 ## Setting it up
 1. Make sure you have your own server, domain and database running and reachable.
-2. Create a database to house your information. Example: `youtube_channels`
-3. Add a table to your database for your channel. Example: `DoSoConfidently` or `dsc`
+2. See below how to set up your database tables.
 4. Upload these files to your server, directly on the domain root.
 5. In `config.php`, change the values for your database connection to match your credentials.
 
+## Setting up the databaes
+```
+--
+-- Table structure that houses the actual list
+-- Replace <CHANNEL_NAME> with your desired channel name
+-- For multiple channels, each channel should have a table
+--
+
+CREATE TABLE `<CHANNEL_NAME>` (
+  `id` int(11) NOT NULL,
+  `user` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for telling if the queue is open or not
+-- Make <CHANNEL_NAME> the same as above
+-- Insert any additional channels as needed (needs a table like above)
+--
+
+CREATE TABLE `channel_statuses` (
+  `id` int(11) NOT NULL,
+  `channel_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `is_open` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `channel_statuses` (`id`, `channel_name`, `is_open`) VALUES
+(1, '<CHANNEL_NAME>', 0);
+```
+
 ## Create the Nightbot commands
+*All "channel" values must be the same as <CHANNEL_NAME>*
 
 ### Command: !addme
 ```
